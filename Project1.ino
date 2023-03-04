@@ -18,7 +18,7 @@ void loop() {
   buttonState = digitalRead(BUTTON_PIN);
   
   // If button is pressed, turn on LED and buzzer
-  if (buttonState == LOW) {
+  if (buttonState == HIGH) {
     digitalWrite(LED_PIN, HIGH);
     tone(BUZZER_PIN, 100);
   } else {
