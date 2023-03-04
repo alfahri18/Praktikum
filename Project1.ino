@@ -1,36 +1,28 @@
-// definisikan pin dari button dan buzzer
-#define buttonPin1 D2
-#define buzzerPin D4
-#define ledPin D5
+// Define pins
+const int BUZZER_PIN = D2;
+const int LED_PIN = D5;
+const int BUTTON_PIN = D6;
 
-// inisialisasi variabel untuk menyimpan status button
-int buttonState1 = 0;
-int buttonState2 = 0;
+// Define variables
+int buttonState = 0;
 
 void setup() {
-  // set pin dari button sebagai input
-  pinMode(buttonPin1, INPUT);
-  
-  // set pin dari buzzer dan led sebagai output
-  pinMode(buzzerPin, OUTPUT);
-  pinMode(ledPin, OUTPUT);
-
-
-  Serial.println("Connected to WiFi");
-  Serial.println(WiFi.localIP());
+  // Initialize pins
+  pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
 }
 
 void loop() {
-  // membaca status dari button
-  buttonState1 = digitalRead(buttonPin1);
-  buttonState2 = digitalRead(buttonPin2);
-
-  // jika salah satu button ditekan, buzzer dan led menyala
-  if (buttonState1 == HIGH) {
-    digitalWrite(buzzerPin, HIGH);
-    digitalWrite(ledPin, HIGH);
+  // Check button state
+  buttonState = digitalRead(BUTTON_PIN);
+  
+  // If button is pressed, turn on LED and buzzer
+  if (buttonState == LOW) {
+    digitalWrite(LED_PIN, HIGH);
+    tone(BUZZER_PIN, 100);
   } else {
-    digitalWrite(buzzerPin, LOW);
-    digitalWrite(ledPin, LOW);
+    digitalWrite(LED_PIN, LOW);
+    noTone(BUZZER_PIN);
   }
 }
